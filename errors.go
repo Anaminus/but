@@ -65,6 +65,19 @@ func Logf(format string, args ...interface{}) {
 	fmt.Fprintf(os.Stderr, format, args...)
 }
 
+// Fail prints the given arguments to stderr and exits.
+func Fail(args ...interface{}) {
+	fmt.Fprintln(os.Stderr, args...)
+	os.Exit(1)
+}
+
+// Failf formats the arguments according to format, prints the result to stderr,
+// and exits.
+func Failf(format string, args ...interface{}) {
+	fmt.Fprintf(os.Stderr, format, args...)
+	os.Exit(1)
+}
+
 // Errors groups together multiple errors as a single error.
 type Errors struct {
 	// Msg is an optional message to be displayed before the list of errors.
