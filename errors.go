@@ -28,7 +28,7 @@ func IfError(err error, args ...interface{}) bool {
 // string annotates the error. Returns true if the error is non-nil.
 func IfErrorf(err error, format string, args ...interface{}) bool {
 	if err != nil {
-		err = errors.Wrapf(err, format, args[1:])
+		err = errors.Wrapf(err, format, args...)
 		fmt.Fprintln(os.Stderr, err)
 		return true
 	}
