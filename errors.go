@@ -4,7 +4,6 @@ package but
 
 import (
 	"fmt"
-	"github.com/pkg/errors"
 	"os"
 	"strings"
 )
@@ -15,7 +14,7 @@ import (
 func IfError(err error, args ...interface{}) bool {
 	if err != nil {
 		if len(args) > 0 {
-			err = errors.Wrap(err, fmt.Sprint(args...))
+			err = fmt.Errorf(fmt.Sprint(args...)+": %w", err)
 		}
 		fmt.Fprintln(os.Stderr, err)
 		return true
@@ -28,7 +27,8 @@ func IfError(err error, args ...interface{}) bool {
 // string annotates the error. Returns true if the error is non-nil.
 func IfErrorf(err error, format string, args ...interface{}) bool {
 	if err != nil {
-		err = errors.Wrapf(err, format, args...)
+		args = append(args, err)
+		err = fmt.Errorf(format+": %w", args...)
 		fmt.Fprintln(os.Stderr, err)
 		return true
 	}
