@@ -65,15 +65,15 @@ func Logf(format string, args ...interface{}) {
 	fmt.Fprintf(os.Stderr, format, args...)
 }
 
-// Fail prints the given arguments to stderr and exits.
-func Fail(args ...interface{}) {
+// Fatal prints the given arguments to stderr and exits.
+func Fatal(args ...interface{}) {
 	fmt.Fprintln(os.Stderr, args...)
 	os.Exit(1)
 }
 
-// Failf formats the arguments according to format, prints the result to stderr,
-// and exits.
-func Failf(format string, args ...interface{}) {
+// Fatalf formats the arguments according to format, prints the result to
+// stderr, and exits.
+func Fatalf(format string, args ...interface{}) {
 	fmt.Fprintf(os.Stderr, format, args...)
 	os.Exit(1)
 }
